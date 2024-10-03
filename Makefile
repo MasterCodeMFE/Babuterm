@@ -1,7 +1,7 @@
 # --------------------------------------
 # Nombre del archivo ejecutable
 # --------------------------------------
-NAME = minishell
+NAME = babuterm
 
 # --------------------------------------
 # Directorio de archivos objeto
