@@ -6,11 +6,93 @@
 /*   By: manufern <manufern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:56:18 by manufern          #+#    #+#             */
-/*   Updated: 2024/09/16 14:12:54 by manufern         ###   ########.fr       */
+/*   Updated: 2025/05/14 19:34:03 by manufern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <wchar.h>
+#include <locale.h>
+#include <stdlib.h>
+#include <time.h>
+
+void bauino(void)
+{
+	setlocale(LC_ALL, "");
+    srand(time(NULL));
+
+    // Hoguera animada con diferentes intensidades
+    const char *hoguera[] = {
+        "     (  🔥  )     ",
+        "    (  🔥🔥  )    ",
+        "   (  🔥🔥🔥  )   ",
+        "  (  🔥🔥🔥🔥  )  "
+    };
+
+    // Diferentes poses de babuinos bailando
+    const char *monos[] = { "🙈", "🙉", "🙊", "🐵", "🦍" };
+    const char *colores[] = { "\033[1;31m", "\033[1;33m", "\033[1;32m", "\033[1;35m" };
+
+    printf("\033[2J\033[H"); // Limpiar pantalla
+
+    for(int ciclo = 0; ciclo < 20; ciclo++) {
+        printf("\033[2J\033[H");
+        
+        // Cielo nocturno con estrellas aleatorias
+        printf("\033[1;36m");
+        for(int i = 0; i < 5; i++) {
+            printf("%*s%s", rand() % 30, "", "✦");
+        }
+        printf("\n\n");
+
+        // Hoguera centrada
+        printf("%*s%s%s\n\n", 20, "", colores[ciclo % 4], hoguera[ciclo % 4]);
+
+        // Babuinos bailando en círculo
+        printf("%*s%s", 10, "", monos[(ciclo+0) % 5]);
+        printf("%*s%s", 10, "", monos[(ciclo+2) % 5]);
+        printf("\n");
+
+        printf("%s", monos[(ciclo+4) % 5]);
+        printf("%*s%s", 25, "", monos[(ciclo+1) % 5]);
+        printf("\n");
+
+        printf("%*s%s", 15, "", monos[(ciclo+3) % 5]);
+        printf("\n\n");
+
+        // Mensaje cambiante
+        const char *mensajes[] = {
+            "¡Ritual de la Luna Llena!",
+            "¡Bailando para los dioses simios!",
+            "¡Ofrenda al Gran Plátano!",
+            "¡Uh-uh-ah-ah! 🎶"
+        };
+        printf("%*s\033[1;33m%s\033[0m\n", 15, "", mensajes[ciclo % 4]);
+
+        usleep(300000);
+        fflush(stdout);
+    }
+
+    // Final épico
+    printf("\033[2J\033[H");
+    printf("\n\n\033[1;31m");
+    printf("    ╔════════════════════╗\n");
+    printf("    ║ ¡RITUAL COMPLETADO!║\n");
+    printf("    ║    LA TRIBU ES     ║\n");
+    printf("    ║    BENDECIDA       ║\n");
+    printf("    ╚════════════════════╝\n");
+    printf("\033[3;33m");
+    printf("       .-~~~~-.\n");
+    printf("      /  o  o  \\\n");
+    printf("     |    🎵    |\n");
+    printf("      \\  ===  /\n");
+    printf("       '.___.'\n");
+    printf("    🙊🙉🙈🙊🙉🙈\n");
+    printf("\033[0m");
+}
+
 
 int	build_up(t_cmd *comand, t_list_env *environ)
 {
@@ -79,6 +161,12 @@ void	process_input(t_list_env *envp)
 		siginit();
 		line = readline(JUNGLE_GREEN "🦧BABUTERM🦧➤ " RESET);
 		add_history(line);
+		if (ft_strcmp(line, "babuino") == 0)
+		{
+			bauino();
+			
+			continue ;
+		}
 		aux = ft_strtrim(line, " ");
 		if (aux == NULL)
 			exit(0);
