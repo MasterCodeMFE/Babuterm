@@ -6,7 +6,7 @@
 /*   By: manufern <manufern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 11:56:18 by manufern          #+#    #+#             */
-/*   Updated: 2025/05/14 19:34:03 by manufern         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:03:14 by manufern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,40 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <time.h>
+#include <termios.h>
+#include <stdbool.h>
+
+
+
+void easter_egg_platano() {
+    printf("\033[2J\033[H"); // Limpiar pantalla
+    
+    // Arte ASCII del babuino comiendo plátano gigante
+    printf("\033[1;33m"); // Amarillo
+    printf("    ⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀\n");
+    printf("    ⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀\n");
+    printf("    ⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀⠀\n");
+    printf("    ⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀\n");
+    printf("    ⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀\n");
+    printf("    ⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀\n");
+    printf("    🐒⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿🍌\n");
+    printf("    ⠀⠈⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠁⠀⠀\n");
+    printf("\033[1;31m"); // Rojo
+    
+    // Mensaje de la secta
+    printf("\n  ¡LA SECTA DE LOS BABUINOS TE BENDICE!\n");
+    printf("  » El plátano gigante ha sido devorado «\n\n");
+    printf("\033[3;33m"); // Amarillo oscuro
+    printf("       .-~~~~-.\n");
+    printf("      /  o  o  \\\n");
+    printf("     |    ▽    |\n");
+    printf("      \\  ===  /\n");
+    printf("       '.___.'\n");
+    printf("\033[1;36m"); // Cian
+    printf("  ¡El espíritu del plátano ahora vive en ti!\n\033[0m");
+    
+    sleep(5); // Mostrar por 5 segundos
+}
 
 void bauino(void)
 {
@@ -164,6 +198,12 @@ void	process_input(t_list_env *envp)
 		if (ft_strcmp(line, "babuino") == 0)
 		{
 			bauino();
+			
+			continue ;
+		}
+		if (ft_strcmp(line, "platano") == 0)
+		{
+			easter_egg_platano();
 			
 			continue ;
 		}
